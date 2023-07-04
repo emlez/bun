@@ -1871,6 +1871,7 @@ pub const ModuleLoader = struct {
                 .@"detect-libc" => return jsResolvedSource(jsc_vm, jsc_vm.load_builtins_from_path, .@"detect-libc", if (Environment.isLinux) "thirdparty/detect-libc.linux.js" else "thirdparty/detect-libc.js", specifier),
                 .undici => return jsResolvedSource(jsc_vm, jsc_vm.load_builtins_from_path, .undici, "thirdparty/undici.js", specifier),
                 .ws => return jsResolvedSource(jsc_vm, jsc_vm.load_builtins_from_path, .ws, "thirdparty/ws.js", specifier),
+                .@"utf-8-validate" => return jsResolvedSource(jsc_vm, jsc_vm.load_builtins_from_path, .@"utf-8-validate", "thirdparty/utf-8-validate.js", specifier),
 
                 .@"node:cluster" => return jsResolvedSource(jsc_vm, jsc_vm.load_builtins_from_path, .@"node:cluster", "node/cluster.js", specifier),
                 .@"node:dgram" => return jsResolvedSource(jsc_vm, jsc_vm.load_builtins_from_path, .@"node:dgram", "node/dgram.js", specifier),
@@ -2055,6 +2056,7 @@ pub const HardcodedModule = enum {
     @"node:zlib",
     undici,
     ws,
+    @"utf-8-validate",
     // These are all not implemented yet, but are stubbed
     @"node:v8",
     @"node:trace_events",
@@ -2127,6 +2129,7 @@ pub const HardcodedModule = enum {
             .{ "node:zlib", HardcodedModule.@"node:zlib" },
             .{ "undici", HardcodedModule.undici },
             .{ "ws", HardcodedModule.ws },
+            .{ "utf-8-validate", HardcodedModule.@"utf-8-validate" },
         },
     );
     pub const Alias = struct {
@@ -2226,6 +2229,7 @@ pub const HardcodedModule = enum {
             .{ "worker_threads", .{ .path = "node:worker_threads" } },
             .{ "ws", .{ .path = "ws" } },
             .{ "ws/lib/websocket", .{ .path = "ws" } },
+            .{ "utf-8-validate", .{ .path = "utf-8-validate" } },
             .{ "zlib", .{ .path = "node:zlib" } },
 
             // These are returned in builtinModules, but probably not many packages use them

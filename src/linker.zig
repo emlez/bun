@@ -281,12 +281,6 @@ pub const Linker = struct {
                             }
                         }
 
-                        if (JSC.DisabledModule.has(import_record.path.text)) {
-                            import_record.path.is_disabled = true;
-                            import_record.do_commonjs_transform_in_printer = true;
-                            continue;
-                        }
-
                         // if (strings.eqlComptime(import_record.path.text, "process")) {
                         //     import_record.path.text = "node:process";
                         //     externals.append(record_index) catch unreachable;
